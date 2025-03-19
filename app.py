@@ -27,6 +27,7 @@ init_db()
 def doar():
     # Variável dados receba a resposta do cliente em JSON
     dados = request.get_json()
+    print(f'AQUI ESTÃO OS DADOS RETORNADOS DO CLIENTE {dados}')
 
     titulo = dados.get("titulo")
     categoria = dados.get("categoria")
@@ -37,13 +38,12 @@ def doar():
         return jsonify({"erro":"Todos os campos são obrigatórios"}),400 # 400 Indica que o servidor não pode processar uma solicitação
 
     with sqlite3.connect("database.db") as conn:
-
         conn.execute(f"""
-        INSERT INTO LIVROS (titulo, categoria, autor, image_url)
-        VALUES ("{titulo}", "{categoria}", "{autor}", "{image_url}")
+            INSERT INTO LIVROS (titulo, categoria, autor, image_url)
+            VALUES ("{titulo}", "{categoria}", "{autor}", "{image_url}")
         """)
 
-    conn.commit()
+    conn.commit() # Comando para salvar as informações no banco de dados
 
     return jsonify({"mensagem": "Livro cadastrado com sucesso"}), 201
 
