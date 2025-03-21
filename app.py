@@ -47,6 +47,29 @@ def doar():
 
     return jsonify({"mensagem": "Livro cadastrado com sucesso"}), 201
 
+@app.route("/livros", methods=["GET"])
+def listar_livros():
+
+    with sqlite3.connect("database.db") as conn:
+        livros = conn.execute("SELECT * FROM LIVROS").fetchall() # fetchall() - 'Traduzir' para o formatado que o python entenda (SQL -> Python)
+
+        livros_formatados = [] 
+
+        for item in livros:
+            # O item vai passar por cada informação no banco de dados e estruturar elas
+            dicionario_livros = {
+                "id": item[0],
+                "titulo": item[1],
+                "categoria": item[2],
+                "autor": item[3],
+                "image_url": item[4]
+            }
+            livros_formatados.append(dicionario_livros) # append() adiciona uma informação no final da lista
+
+    return jsonify(livros_formatados)
+
+
+
 # Se o arquivo app.py == ao arquivo principal da nossa aplicação
 if __name__ == "__main__":
     app.run(debug=True)
