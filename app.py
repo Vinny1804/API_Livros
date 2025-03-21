@@ -5,6 +5,9 @@ import sqlite3
 app = Flask(__name__)
 
 # route --> São os endpoint da nossa API
+@app.route('/')
+def home():
+    return "<h2>Seja o motivo de alguém sorrir hoje, mesmo que esse alguém seja você.</h2>"
 
 def init_db():
     # Crie o nosso banco de dados com um arquivo'database.db' e conecte a variável conn (connection)
