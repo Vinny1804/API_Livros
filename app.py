@@ -54,7 +54,7 @@ def doar():
 def listar_livros():
 
     with sqlite3.connect("database.db") as conn:
-        livros = conn.execute("SELECT * FROM LIVROS").fetchall() # fetchall() - 'Traduzir' para o formatado que o python entenda (SQL -> Python)
+        livros = conn.execute("SELECT * FROM LIVROS").fetchall() # fetchall() - 'Traduzir' para o formato que o python entenda (SQL -> Python)
 
         livros_formatados = [] 
 
