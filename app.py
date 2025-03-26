@@ -1,8 +1,17 @@
-from flask import Flask,request,jsonify
-
 import sqlite3
 
+from flask import Flask,request,jsonify
+from flask_cors import CORS
+
 app = Flask(__name__)
+CORS(app)
+
+# Same Origin Policy -> Regra entre os navegadores (Consumir uma API se estiver ambos os sites no mesmo dominio)
+
+# CORS - Cross Origin Resource Sharing (Compartilhamento de Recursos entre origens diferentes)
+
+# CORS desabilita o Same Origin Policy para poder consumir uma API
+
 
 # route --> São os endpoint da nossa API
 @app.route('/')
