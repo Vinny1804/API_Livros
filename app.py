@@ -32,6 +32,33 @@ def init_db():
                 )
             """
         )
+
+        quantidade = conn.execute("SELECT COUNT(*) FROM livros").fetchone()[0]
+
+        if quantidade == 0:
+            livros_padrao = [
+            ("Harry Potter e a Pedra Fisolofal", "Fantasia", "J.K. Rowling", "https://m.media-amazon.com/images/I/81ibfYk4qmL._SY425_.jpg"),
+            ("Harry Potter e a Câmara Secreta", "Fantasia", "J.K. Rowling", "https://m.media-amazon.com/images/I/51SnGLrrJcL._SY445_SX342_.jpg"),
+            ("Harry Potter e o Prisioneiro de Azkaban", "Fantasia", "J.K. Rowling", "https://m.media-amazon.com/images/I/81u+ljPVifL._SY425_.jpg"),
+            ("Harry Potter e o Cálice de Fogo", "Fantasia", "J.K. Rowling", "https://m.media-amazon.com/images/I/81nTLN-kz7L._SY425_.jpg"),
+            ("Harry Potter e a Ordem da Fênix", "Fantasia", "J.K. Rowling", "https://m.media-amazon.com/images/I/41SknlxiqHL._SY445_SX342_.jpg"),
+            ("Harry Potter e o Enigma do Príncipe", "Fantasia", "J.K. Rowling", "https://m.media-amazon.com/images/I/51msVf94L2L._SY445_SX342_.jpg"),
+            ("Harry Potter e as Relíquias da Morte", "Fantasia", "J.K. Rowling", "https://m.media-amazon.com/images/I/51PoQ61oq-L._SY445_SX342_.jpg"),
+            ("Diário de uma Paixão", "Romance", "Nicholas Sparks", "https://books.google.com.br/books/publisher/content?id=yRsADgAAQBAJ&hl=pt-BR&pg=PA49&img=1&zoom=3&bul=1&sig=ACfU3U1I8EkMtQJWMgWPMRCSJIHXaDmDpw&w=1280"),
+            ("O Desejo", "Romance", "Nicholas Sparks", "https://books.google.com.br/books/publisher/content?id=vVA_EAAAQBAJ&hl=pt-BR&pg=PP1&img=1&zoom=3&bul=1&sig=ACfU3U3x-kTAh2duour20DIDxbvut77Fpw&w=1280"),
+            ("O Diário de Anne Frank", "Biografia", "Anne Frank", "https://http2.mlstatic.com/D_NQ_NP_2X_904077-MLU50455061292_062022-F.webp"),
+            ("Amigos, Amores e Aquela Coisa Terrível", "Biografia", "Matthew Perry", "https://m.media-amazon.com/images/I/41zeFYXE1aL._SY445_SX342_.jpg"),
+            ("O Pequeno Príncipe", "Fábula", "Antoine de Saint-Exupéry", "https://m.media-amazon.com/images/I/81TmOZIXvzL._SL1500_.jpg"),
+            ]
+
+            for livro in livros_padrao:
+                titulo, categoria, autor, image_url = livro
+
+                conn.execute(f'''
+                        INSERT INTO livros (titulo, categoria, autor, image_url)
+                        VALUES ("{titulo}", "{categoria}", "{autor}", "{image_url}")
+                ''')
+            conn.commit()
 init_db()
 
 
